@@ -1,55 +1,76 @@
 package services;
 
-import java.time.temporal.ChronoUnit;
-
+import java.time.LocalDate;
 import model.Bus;
 import model.Flight;
 import model.Hotel;
 import model.Train;
 
-public class FareCalculator extends Booking  {
-	//Booking.booking();
-	
-	
+// Type your code
+
+public class FareCalculator extends Booking {
+	Booking b = new Booking();
+
 	public double book(Hotel hotel) {
-		Double tariff;
-		int noOfPersons=hotel.getNoOfPersons();
-		int rates=hotel.getRates();
-		long days=ChronoUnit.DAYS.between(hotel.getFromdate(), hotel.getTodate());
-		double rate=super.booking(noOfPersons, rates);
-		int month=hotel.getFromdate().getMonthValue();
-		
-		System.out.println(month);
-		System.out.println(rate);
-		System.out.println(days);
-		if((month>=1 && month <4) || (month>6 && month<11))
-		{
-		System.out.println("Inside if loop");
-			tariff=(rate-(rate*(25/100.0)))*days;
-			System.out.println(tariff);
-		}
-		else
-			{
-			System.out.println("Entering else part");
-			tariff=(rate+(rate*(50/100.0)))*days;
-		System.out.println(tariff);
-			}
-		return tariff;
-		
+		int noOfPersons = hotel.getNoOfPersons();
+		String roomType = hotel.getRoomType();
+		int rates = hotel.getRates();
+		String occupancy = hotel.getOccupancy();
+		LocalDate fromdate = hotel.getFromdate();
+		LocalDate todate = hotel.getTodate();
+		double d = 0;
+		if (todate.isAfter(fromdate)) {
+
+			Double data1;
+
+			data1 = b.booking(noOfPersons, rates);
+			return data1;
+		} else
+			return d;
+
 	}
 
+	// method flight
+	public double book(Flight flight) {
+		int noOfPersons = flight.getNoOfPersons();
+		String classType = flight.getClassType();
+		int rates = flight.getRates();
+		LocalDate from = flight.getFrom();
+		LocalDate to = flight.getTo();
+		String triptype = flight.getTriptype();
 
-	
-	
+		double data = 0;
+
+		if (triptype == "One-way") {
+			data = b.booking(noOfPersons, rates);
+		} else {
+			if (to.isAfter(from))
+				data = b.booking(noOfPersons, rates);
+		}
+		return data;
+
+	}
+
+	// method train
 	public double book(Train train) {
-		double totalfare = train.getNoOfPersons() * train.getRates();
-		return totalfare;
-	};
+		int noOfPersons = train.getNoOfPersons();
+		String berth = train.getBerth();
+		int rates = train.getRates();
+		LocalDate date = train.getDate();
+		double data = b.booking(noOfPersons, rates);
+
+		return data;
+
+	}
+
 	public double book(Bus bus) {
-		
-		double totalfare = bus.getNoOfPersons() * bus.getRates();
-		return totalfare;
-	};
-	
+		int noOfPersons = bus.getNoOfPersons();
+		String busType = bus.getBusType();
+		int rates = bus.getRates();
+		LocalDate date = bus.getDate();
+		double data = b.booking(noOfPersons, rates);
+
+		return data;
+	}
 
 }

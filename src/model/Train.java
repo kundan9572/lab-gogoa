@@ -1,12 +1,23 @@
 package model;
+//Type your code
 
 import java.time.LocalDate;
 
-public class Train {
+public class Train{
 	private int noOfPersons;
 	private String berth;
 	private int rates;
 	private LocalDate date;
+	
+	public Train(int noOfPersons, int rates, String berth, LocalDate date) 
+	{
+		super();
+		this.noOfPersons = noOfPersons;
+		this.berth = berth;
+		this.rates = rates;
+		this.date = date;
+	}
+	
 	public int getNoOfPersons() {
 		return noOfPersons;
 	}
@@ -31,14 +42,4 @@ public class Train {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	public Train(int noOfPersons, String berth, int rates, LocalDate date) {
-		super();
-		this.noOfPersons = noOfPersons;
-		this.berth = berth;
-		this.rates = rates;
-		this.date = date;
-	}
-	
-	
-
 }
